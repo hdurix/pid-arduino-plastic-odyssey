@@ -83,7 +83,7 @@ double Adafruit_MAX31855::readCelsius(void) {
 
   v = spiread32();
 
-  //Serial.print("0x"); Serial.println(v, HEX);
+  Serial.print("0x"); Serial.println(v, HEX);
 
   /*
   float internal = (v >> 4) & 0x7FF;

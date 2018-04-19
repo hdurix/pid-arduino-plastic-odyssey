@@ -46,8 +46,10 @@ void setup() {
 
 void loop() {
   // basic readout test, just print the current temp
-   Serial.print("Internal Temp = ");
-   Serial.println(thermocouple.readInternal());
+   Serial.print("Pure result = ");
+   Serial.println(thermocouple.spiread32());
+   //Serial.print("Internal Temp = ");
+   //Serial.println(thermocouple.readInternal());
 
    double c = thermocouple.readCelsius();
    if (isnan(c)) {
