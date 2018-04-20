@@ -2,11 +2,13 @@
 
 class PidCalculator {
  public:
-  PidCalculator(double setpoint);
+  PidCalculator(double sp, double kp, double ki, double kd);
 
   double calculate(double pv);
   
  private:
-  int setpoint;
+  double setpoint;
+  double input;
+  double output;
   PID *pid;
 };

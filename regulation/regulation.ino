@@ -5,7 +5,7 @@
 
 MockResistor resistor;
 MockTemperatureSensor temperatureSensor;
-PidCalculator pidCalculator(300.0);
+PidCalculator pidCalculator(300.0, 1.0, 0.5, 0.0);
 
 void setup() {
   Serial.begin(9600);
@@ -20,13 +20,11 @@ void setup() {
 void loop() {
   Serial.println("Starting loop");
 
-  int temperature = getTemperature();
+  double temperature = getTemperature();
 
-  double pidResult = pidCalculator.calculate(temperature);
-
-  Serial.print("PID result:");
-  Serial.println(pidResult); 
-  setOutputPower(temperature);
+  double pidResult = calculatePid(temperature);
+   
+  setOutputPower(pidResult);
 
   delay(1000);
 }
@@ -38,6 +36,15 @@ double getTemperature(void) {
   Serial.println(temperature);
 
   return temperature;
+}
+
+double calculatePid(double temperature) {
+  double pidResult = pidCalculator.calculate(temperature);
+
+  Serial.print("PID result:");
+  Serial.println(pidResult);
+
+  return pidResult;
 }
 
 void initOutputPower() {
