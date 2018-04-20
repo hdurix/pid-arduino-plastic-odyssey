@@ -1,9 +1,13 @@
 
 #include "Regulator.h"
 
-Regulator regulator1(9, 100.0, 1.0, 0.5, 0.0);
-Regulator regulator2(10, 200.0, 1.0, 0.5, 0.0);
-Regulator regulator3(11, 300.0, 1.0, 0.5, 0.0);
+#define NB_REGULATORS 3
+
+Regulator regulators[NB_REGULATORS] = {
+  Regulator(9, 100.0, 1.0, 0.5, 0.0),
+  Regulator(10, 200.0, 1.0, 0.5, 0.0),
+  Regulator(11, 300.0, 1.0, 0.5, 0.0)
+};
 
 void setup() {
   Serial.begin(9600);
@@ -16,9 +20,9 @@ void setup() {
 void loop() {
   Serial.println("Starting loop");
 
-  regulator1.regulate();
-  regulator2.regulate();
-  regulator3.regulate();
+  for (int i = 0; i < NB_REGULATORS; i++) {
+    regulators[i].regulate();
+  }
 
   delay(1000);
 }
