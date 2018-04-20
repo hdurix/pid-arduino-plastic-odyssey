@@ -1,45 +1,68 @@
 
 #include "MockResistor.h"
 #include "MockTemperatureSensor.h"
+#include "PidCalculator.h"
 
-MockResistor mockResistor;
-MockTemperatureSensor mockTemperatureSensor;
+MockResistor resistor;
+MockTemperatureSensor temperatureSensor;
+PidCalculator pidCalculator(300.0);
 
 void setup() {
   Serial.begin(9600);
   
-  while (!Serial) delay(1); // wait for Serial on Leonardo/Zero, etc
+  while (!Serial) delay(1);
   
   Serial.println("Regulation initialization");
 
-  mockResistor.disableLight();
+  initOutputPower();
 }
 
 void loop() {
   Serial.println("Starting loop");
 
-  int temperature = mockTemperatureSensor.getTemperature();
-  
-  Serial.print("Current temperature is: ");
-  Serial.println(temperature);
+  int temperature = getTemperature();
 
-  mockResistor.setBrightness(temperature > 255 ? 255 : temperature);
+  double pidResult = pidCalculator.calculate(temperature);
+
+  Serial.print("PID result:");
+  Serial.println(pidResult); 
+  setOutputPower(temperature);
 
   delay(1000);
 }
 
+double getTemperature(void) {
+  double temperature = temperatureSensor.getTemperature();
+  
+  Serial.print("Current temperature is: ");
+  Serial.println(temperature);
+
+  return temperature;
+}
+
+void initOutputPower() {
+  resistor.disableLight();
+}
+
+void setOutputPower(int outputPower) {
+  Serial.print("Set output power to: ");
+  Serial.println(outputPower);
+
+  resistor.setBrightness(outputPower > 255 ? 255 : outputPower);
+}
+
 void testBright() {
-  mockResistor.enableLight();
+  resistor.enableLight();
   delay(3000);
-  mockResistor.setBrightness(0);
+  resistor.setBrightness(0);
   delay(3000);
-  mockResistor.setBrightness(1);
+  resistor.setBrightness(1);
   delay(3000);
-  mockResistor.setBrightness(129);
+  resistor.setBrightness(129);
   delay(3000);
-  mockResistor.setBrightness(255);
+  resistor.setBrightness(255);
   delay(3000);
-  mockResistor.disableLight();
+  resistor.disableLight();
   delay(3000);
 }
 

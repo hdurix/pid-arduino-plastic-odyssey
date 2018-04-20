@@ -3,8 +3,8 @@ class MockTemperatureSensor {
  public:
   MockTemperatureSensor();
 
-  int getTemperature(void);
+  double getTemperature(void);
 
 private:
-  int currentTemperature;
+  double currentTemperature;
 };

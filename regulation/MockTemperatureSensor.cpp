@@ -1,11 +1,11 @@
 #include "MockTemperatureSensor.h"
 
 MockTemperatureSensor::MockTemperatureSensor() {
-  currentTemperature = 20;
+  currentTemperature = 20.0;
 }
 
-int MockTemperatureSensor::getTemperature(void) {
-  currentTemperature += 5;
+double MockTemperatureSensor::getTemperature(void) {
+  currentTemperature += 5.0;
   return currentTemperature;
 }
 
