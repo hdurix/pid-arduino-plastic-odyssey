@@ -3,7 +3,7 @@
 #include "MockTemperatureSensor.h"
 #include "PidCalculator.h"
 
-MockResistor resistor;
+MockResistor resistor(9);
 MockTemperatureSensor temperatureSensor;
 PidCalculator pidCalculator(300.0, 1.0, 0.5, 0.0);
 

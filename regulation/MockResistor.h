@@ -7,12 +7,12 @@
 
 class MockResistor {
  public:
-  MockResistor();
+  MockResistor(int pin);
 
   void enableLight(void);
   void disableLight(void);
   void setBrightness(int);
 
 private:
-  int ledLight;
+  int outputPin;
 };
