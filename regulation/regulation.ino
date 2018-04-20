@@ -1,11 +1,7 @@
 
-#include "MockResistor.h"
-#include "MockTemperatureSensor.h"
-#include "PidCalculator.h"
+#include "Regulator.h"
 
-MockResistor resistor(9);
-MockTemperatureSensor temperatureSensor;
-PidCalculator pidCalculator(300.0, 1.0, 0.5, 0.0);
+Regulator regulator(9, 300.0, 1.0, 0.5, 0.0);
 
 void setup() {
   Serial.begin(9600);
@@ -13,8 +9,6 @@ void setup() {
   while (!Serial) delay(1);
   
   Serial.println("Regulation initialization");
-
-  initOutputPower();
 }
 
 void loop() {
@@ -30,7 +24,7 @@ void loop() {
 }
 
 double getTemperature(void) {
-  double temperature = temperatureSensor.getTemperature();
+  double temperature = regulator.getTemperature();
   
   Serial.print("Current temperature is: ");
   Serial.println(temperature);
@@ -39,7 +33,7 @@ double getTemperature(void) {
 }
 
 double calculatePid(double temperature) {
-  double pidResult = pidCalculator.calculate(temperature);
+  double pidResult = regulator.calculate(temperature);
 
   Serial.print("PID result:");
   Serial.println(pidResult);
@@ -47,29 +41,11 @@ double calculatePid(double temperature) {
   return pidResult;
 }
 
-void initOutputPower() {
-  resistor.disableLight();
-}
-
 void setOutputPower(int outputPower) {
   Serial.print("Set output power to: ");
   Serial.println(outputPower);
 
-  resistor.setBrightness(outputPower > 255 ? 255 : outputPower);
+  regulator.setOutputPower(outputPower > 255 ? 255 : outputPower);
 }
 
-void testBright() {
-  resistor.enableLight();
-  delay(3000);
-  resistor.setBrightness(0);
-  delay(3000);
-  resistor.setBrightness(1);
-  delay(3000);
-  resistor.setBrightness(129);
-  delay(3000);
-  resistor.setBrightness(255);
-  delay(3000);
-  resistor.disableLight();
-  delay(3000);
-}
 

@@ -1,3 +1,6 @@
+#ifndef _PID_CALCULATOR_H
+#define _PID_CALCULATOR_H
+
 #include "PID_v1.h"
 
 class PidCalculator {
@@ -12,3 +15,5 @@ class PidCalculator {
   double output;
   PID *pid;
 };
+
+#endif

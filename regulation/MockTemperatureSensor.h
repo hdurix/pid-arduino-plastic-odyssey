@@ -1,3 +1,5 @@
+#ifndef _MOCK_TEMPERATURE_SENSOR_H
+#define _MOCK_TEMPERATURE_SENSOR_H
 
 class MockTemperatureSensor {
  public:
@@ -8,3 +10,5 @@ class MockTemperatureSensor {
 private:
   double currentTemperature;
 };
+
+#endif

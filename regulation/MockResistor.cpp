@@ -5,21 +5,11 @@ MockResistor::MockResistor(int pin) {
   pinMode(outputPin, OUTPUT);
 }
 
-void MockResistor::enableLight(void) {
-  Serial.println("Enable light");
-  digitalWrite(outputPin, HIGH);   // turn the LED on (HIGH is the voltage level)
-}
-
-void MockResistor::disableLight(void) {
-  Serial.println("Disable light");
-  digitalWrite(outputPin, LOW);    // turn the LED off by making the voltage LOW
-}
-
-void MockResistor::setBrightness(int brightness) {
+void MockResistor::setOutputPower(int outputPower) {
   Serial.print("Set brightness to ");
-  Serial.println(brightness);
+  Serial.println(outputPower);
   
-  analogWrite(outputPin, brightness); 
-  analogWrite(10, brightness); 
-  analogWrite(11, brightness); 
+  analogWrite(outputPin, outputPower); 
+  analogWrite(10, outputPower); 
+  analogWrite(11, outputPower); 
 }
