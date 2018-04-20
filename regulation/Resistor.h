@@ -1,5 +1,5 @@
-#ifndef _MOCK_RESISTOR_H
-#define _MOCK_RESISTOR_H
+#ifndef __RESISTOR_H
+#define __RESISTOR_H
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -7,9 +7,9 @@
  #include "WProgram.h"
 #endif
 
-class MockResistor {
+class Resistor {
  public:
-  MockResistor(int pin);
+  Resistor(int pin);
 
   void setOutputPower(int outputPower);
 

@@ -1,7 +1,9 @@
 
 #include "Regulator.h"
 
-Regulator regulator(9, 300.0, 1.0, 0.5, 0.0);
+Regulator regulator1(9, 100.0, 1.0, 0.5, 0.0);
+Regulator regulator2(10, 200.0, 1.0, 0.5, 0.0);
+Regulator regulator3(11, 300.0, 1.0, 0.5, 0.0);
 
 void setup() {
   Serial.begin(9600);
@@ -14,38 +16,10 @@ void setup() {
 void loop() {
   Serial.println("Starting loop");
 
-  double temperature = getTemperature();
-
-  double pidResult = calculatePid(temperature);
-   
-  setOutputPower(pidResult);
+  regulator1.regulate();
+  regulator2.regulate();
+  regulator3.regulate();
 
   delay(1000);
 }
-
-double getTemperature(void) {
-  double temperature = regulator.getTemperature();
-  
-  Serial.print("Current temperature is: ");
-  Serial.println(temperature);
-
-  return temperature;
-}
-
-double calculatePid(double temperature) {
-  double pidResult = regulator.calculate(temperature);
-
-  Serial.print("PID result:");
-  Serial.println(pidResult);
-
-  return pidResult;
-}
-
-void setOutputPower(int outputPower) {
-  Serial.print("Set output power to: ");
-  Serial.println(outputPower);
-
-  regulator.setOutputPower(outputPower > 255 ? 255 : outputPower);
-}
-
 
