@@ -1,7 +1,9 @@
 
 #include "MockResistor.h"
+#include "MockTemperatureSensor.h"
 
 MockResistor mockResistor;
+MockTemperatureSensor mockTemperatureSensor;
 
 void setup() {
   Serial.begin(9600);
@@ -10,10 +12,23 @@ void setup() {
   
   Serial.println("Regulation initialization");
 
+  mockResistor.disableLight();
 }
 
 void loop() {
   Serial.println("Starting loop");
+
+  int temperature = mockTemperatureSensor.getTemperature();
+  
+  Serial.print("Current temperature is: ");
+  Serial.println(temperature);
+
+  mockResistor.setBrightness(temperature > 255 ? 255 : temperature);
+
+  delay(1000);
+}
+
+void testBright() {
   mockResistor.enableLight();
   delay(3000);
   mockResistor.setBrightness(0);
@@ -27,3 +42,4 @@ void loop() {
   mockResistor.disableLight();
   delay(3000);
 }
+
