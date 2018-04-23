@@ -42,3 +42,9 @@ A regulator takes several arguments to configure pins and PID:
 2 things have to be done:
 - Modify the variable `NB_REGULATORS` to be equals to the number of regulators
 - Add/Remove a line of `Regulator(...)` with the wanted configuration
+
+## TODO
+
+- connect the `TemperatureSensor` to a real sensor
+- add the configuration needed for the temperature pin to the `Regulator` class
+- check with a real system and find the fine PID configuration
