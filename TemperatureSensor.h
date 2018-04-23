@@ -2,13 +2,13 @@
 #define __TEMPERATURE_SENSOR_H
 
 class TemperatureSensor {
- public:
-  TemperatureSensor();
+  public:
+    TemperatureSensor();
 
-  double getTemperature(void);
+    double getTemperature(void);
 
-private:
-  double currentTemperature;
+  private:
+    double currentTemperature;
 };
 
 #endif

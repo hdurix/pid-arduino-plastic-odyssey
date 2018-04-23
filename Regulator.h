@@ -6,19 +6,19 @@
 #include "PidCalculator.h"
 
 class Regulator {
- public:
-  Regulator(int pin, double sp, double kp, double ki, double kd);
+  public:
+    Regulator(int pin, double sp, double kp, double ki, double kd);
 
-  void regulate();
+    void regulate();
   
-private:
-  Resistor *resistor;
-  TemperatureSensor *temperatureSensor;
-  PidCalculator *pidCalculator;
+  private:
+    Resistor *resistor;
+    TemperatureSensor *temperatureSensor;
+    PidCalculator *pidCalculator;
   
-  void setOutputPower(int);
-  double getTemperature(void);
-  double calculatePid(double temperature);
+    void setOutputPower(int);
+    double getTemperature(void);
+    double calculatePid(double temperature);
 };
 
 #endif

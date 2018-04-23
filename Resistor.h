@@ -8,13 +8,13 @@
 #endif
 
 class Resistor {
- public:
-  Resistor(int pin);
+  public:
+    Resistor(int pin);
 
-  void setOutputPower(int outputPower);
+    void setOutputPower(int outputPower);
 
-private:
-  int outputPin;
+  private:
+    int outputPin;
 };
 
 #endif
